@@ -1,27 +1,75 @@
-import React, { useState } from 'react';
-import { Container, List, Fab } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import GasTypesItem from '../components/gasTypes/GasTypesItem';
-import GasTypesDialog from '../components/gasTypes/GasTypesDialog';
-import { useGasType } from '../components/gasTypes/GasTypeContext';
+import React, { useState } from "react";
+import { Container, Typography, Button, List } from "@mui/material";
+import GasTypeItem from "../components/gasTypes/GasTypesItem";
+import GasTypeDialog from "../components/gasTypes/GasTypesDialog";
+import { useGasTypes } from "../components/gasTypes/GasTypeContext";
 
-const GasTypeScreen = () => {
-  const { gasTypes } = useGasType();
-  const [open, setOpen] = useState(false);
+function GasTypesScreen() {
+  const { gasTypes, addGasType, deleteGasType, updateGasType } = useGasTypes();
+  const [showDialog, setShowDialog] = useState(false);
+  const [currentGasType, setCurrentGasType] = useState(null);
+
+  const handleSave = (name, wholesalePrice6kg, wholesalePrice13kg) => {
+    if (currentGasType) {
+      updateGasType(
+        currentGasType.id,
+        name,
+        wholesalePrice6kg,
+        wholesalePrice13kg
+      );
+    } else {
+      addGasType(name, wholesalePrice6kg, wholesalePrice13kg);
+    }
+    setShowDialog(false);
+    setCurrentGasType(null);
+  };
 
   return (
-    <Container>
+    <Container style={{ padding: "0" }}>
+      <Typography variant="h6" style={{ textAlign: "left" }}>
+        Gas Types
+      </Typography>
+
+      <Button
+        variant="contained"
+        fullWidth
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          marginBottom: "1rem",
+        }}
+        onClick={() => setShowDialog(true)}
+      >
+        Add Gas Type
+      </Button>
+
       <List>
-        {gasTypes.map((gasType, index) => (
-          <GasTypesItem key={index} gasType={gasType} />
-        ))}
+        {gasTypes
+          .slice()
+          .reverse()
+          .map((gasType, index) => (
+            <React.Fragment key={gasType.id}>
+              <GasTypeItem
+                index={index}
+                gasType={gasType}
+                onEdit={() => {
+                  setCurrentGasType(gasType);
+                  setShowDialog(true);
+                }}
+                onDelete={() => deleteGasType(gasType.id)}
+              />
+            </React.Fragment>
+          ))}
       </List>
-      <Fab color="primary" aria-label="add" onClick={() => setOpen(true)}>
-        <AddIcon />
-      </Fab>
-      <GasTypesDialog open={open} onClose={() => setOpen(false)} />
+
+      <GasTypeDialog
+        open={showDialog}
+        onClose={() => setShowDialog(false)}
+        gasType={currentGasType}
+        onSave={handleSave}
+      />
     </Container>
   );
-};
+}
 
-export default GasTypeScreen;
+export default GasTypesScreen;
