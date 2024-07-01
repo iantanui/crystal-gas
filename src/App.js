@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import DashboardScreen from './pages/DashboardScreen';
+import ProductsScreen from './pages/ProductsScreen';
+import RefillsScreen from './pages/RefillsScreen';
+import ManagementScreen from './pages/ManagementScreen';
+import GasTypeScreen from './pages/GasTypeScreen';
+import { GasTypeProvider } from './components/gasTypes/GasTypeContext';
+import { ProductProvider } from './components/products/ProductContext';
+import { RefillProvider } from './components/refills/RefillContext';
+import TopBar from './components/TopBar/TopBar';
+import BottomBar from './components/BottomBar/BottomBar';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <Router>
+    <GasTypeProvider>
+      <ProductProvider>
+        <RefillProvider>
+          <TopBar />
+          <Routes>
+            <Route path="/" element={<DashboardScreen />} />
+            <Route path="/products" element={<ProductsScreen />} />
+            <Route path="/refills" element={<RefillsScreen />} />
+            <Route path="/management" element={<ManagementScreen />} />
+            <Route path="/gastype" element={<GasTypeScreen />} />
+          </Routes>
+          <BottomBar />
+        </RefillProvider>
+      </ProductProvider>
+    </GasTypeProvider>
+  </Router>
+);
 
 export default App;
