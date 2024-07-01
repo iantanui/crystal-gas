@@ -17,7 +17,7 @@ const BottomBar = () => {
       <BottomNavigationAction label="Home" value="/" icon={<Home />} />
       <BottomNavigationAction label="Products" value="/products" icon={<Inventory />} />
       <BottomNavigationAction label="Refills" value="/refills" icon={<AttachMoney />} />
-      <BottomNavigationAction label="GasTypes" value="/gasTypes" icon={<Home />} />
+      <BottomNavigationAction label="Manage" value="/management" icon={<Home />} />
     </BottomNavigation>
   );
 };
