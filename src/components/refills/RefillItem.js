@@ -21,6 +21,21 @@ const RefillItem = ({ refill, onEdit, onDelete }) => {
     setAnchorEl(null);
   };
 
+  const renderProductList = () => {
+    if (refill.selectedProducts.length === 0) {
+      return <Typography>No products selected</Typography>;
+    }
+
+    return refill.selectedProducts.map((product, index) => (
+      <React.Fragment key={product.id}>
+        <Typography variant="body1">
+          {product.name} - Size: {product.size}, Quantity: {product.quantity}
+          {index < refill.selectedProducts.length - 1 && ","}
+        </Typography>
+      </React.Fragment>
+    ));
+  };
+
   return (
     <Card
       variant="outlined"
@@ -70,23 +85,44 @@ const RefillItem = ({ refill, onEdit, onDelete }) => {
             <MenuItem onClick={onDelete}>Delete</MenuItem>
           </Menu>
         </div>
+
         <Divider style={{ width: "95%", alignSelf: "center" }} />
-        <Typography style={{ marginBottom: "8px" }}>
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
           <span>Customer Name:</span>
           <span> {refill.customerName}</span>
         </Typography>
-        <Typography style={{ marginBottom: "8px" }}>
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
           <span>Phone Number:</span>
           <span>{refill.phoneNumber}</span>
         </Typography>
-        <Typography style={{ marginBottom: "8px" }}>
-          <span>Products:</span>
-          {refill.selectedProducts.map((product) => (
-            <span key={product.id}>
-              {product.name} (Size: {product.size}, Quantity: {product.quantity})
-            </span>
-          ))}
+
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+         <span> Products: </span>
+          <span>{renderProductList()}</span>
         </Typography>
+
+        
       </CardContent>
     </Card>
   );
