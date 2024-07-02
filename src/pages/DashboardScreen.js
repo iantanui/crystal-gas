@@ -3,10 +3,11 @@ import DashboardCard from "../components/dashboard/DashboardCard";
 import { Container, Grid, Typography } from "@mui/material";
 import { useProducts } from "../components/products/ProductContext";
 import { useRefills } from "../components/refills/RefillContext";
+import { List, Menu, Person } from "@mui/icons-material";
 
 const DashboardScreen = () => {
-  const { products } = useProducts;
-  const { refills } = useRefills;
+  const { products } = useProducts();
+  const { refills } = useRefills();
 
   const totalProducts = products ? products.length : 0;
   const totalRefills = refills ? refills.length : 0;
@@ -20,26 +21,29 @@ const DashboardScreen = () => {
         Summary
       </Typography>
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6} md={4}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={4}>
           <DashboardCard
+            icon={<List />}
             label="Total Products"
             value={totalProducts}
             bottom="Products in the shop"
           />
         </Grid>
 
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={4}>
           <DashboardCard
+            icon={<Menu />}
             label="Total Refills"
             value={totalRefills}
             bottom="Refills done"
           />
         </Grid>
 
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={4}>
           <DashboardCard
-            label="Inventory Value"
+            icon={<Person />}
+            label="Total Customers"
             value={totalCustomers}
             bottom="Customers"
           />
