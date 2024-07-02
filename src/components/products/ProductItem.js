@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { MoreVert } from "@mui/icons-material";
 
-const ProductItem = ({ product, onEdit, onDelete }) => {
+const ProductItem = ({ index, product, onEdit, onDelete }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleMenuOpen = (event) => {
@@ -56,11 +56,13 @@ const ProductItem = ({ product, onEdit, onDelete }) => {
               textAlign: "center",
             }}
           >
-            {product.id}
+            {index + 1}
           </Typography>
+
           <IconButton onClick={handleMenuOpen}>
             <MoreVert />
           </IconButton>
+
           <Menu
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
@@ -70,20 +72,50 @@ const ProductItem = ({ product, onEdit, onDelete }) => {
             <MenuItem onClick={onDelete}>Delete</MenuItem>
           </Menu>
         </div>
+
         <Divider style={{ width: "95%", alignSelf: "center" }} />
-        <Typography style={{ marginBottom: "8px" }}>
+
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
           <span>Name:</span>
           <span> {product.name}</span>
         </Typography>
-        <Typography style={{ marginBottom: "8px" }}>
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
           <span>Size:</span>
           <span>{product.size}</span>
         </Typography>
-        <Typography style={{ marginBottom: "8px" }}>
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
           <span>Price:</span>
           <span>{product.price}</span>
         </Typography>
-        <Typography>
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
           <span>Quantity:</span>
           <span>{product.quantity}</span>
         </Typography>
