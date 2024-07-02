@@ -29,7 +29,7 @@ const RefillItem = ({ refill, onEdit, onDelete }) => {
     return refill.selectedProducts.map((product, index) => (
       <React.Fragment key={product.id}>
         <Typography variant="body1">
-          {product.name} - Size: {product.size}, Quantity: {product.quantity}
+        <span style={{ fontWeight: "bold" }}>{product.name}</span> - {product.size}, {product.quantity}
           {index < refill.selectedProducts.length - 1 && ","}
         </Typography>
       </React.Fragment>
