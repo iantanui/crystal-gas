@@ -1,27 +1,61 @@
-import React, { useState } from 'react';
-import { Container, List, Fab } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import RefillItem from '../components/refills/RefillItem';
-import RefillDialog from '../components/refills/RefillDialog';
-import { useRefill } from '../components/refills/RefillContext';
+import React, { useState } from "react";
+import { Container, Typography, Button, List } from "@mui/material";
+import RefillItem from "../components/refills/RefillItem";
+import RefillDialog from "../components/refills/RefillDialog";
+import { useRefills } from "../components/refills/RefillContext";
 
-const RefillsScreen = () => {
-  const { refills } = useRefill();
-  const [open, setOpen] = useState(false);
+function RefillsScreen() {
+  const { refills, addRefill, deleteRefill, updateRefill } = useRefills();
+  const [showDialog, setShowDialog] = useState(false);
+  const [currentRefill, setCurrentRefill] = useState(null);
+
+  const handleSave = (customerName, phoneNumber, selectedProducts) => {
+    if (currentRefill) {
+      updateRefill(currentRefill.id, customerName, phoneNumber, selectedProducts);
+    } else {
+      addRefill(customerName, phoneNumber, selectedProducts);
+    }
+    setShowDialog(false);
+    setCurrentRefill(null);
+  };
 
   return (
-    <Container>
+    <Container style={{ padding: "0" }}>
+      <Typography variant="h6" style={{ textAlign: "left" }}>
+        Refills
+      </Typography>
+
+      <Button
+        variant="contained"
+        fullWidth
+        style={{ backgroundColor: "black", color: "white", marginBottom: "1rem" }}
+        onClick={() => setShowDialog(true)}
+      >
+        Add Refill
+      </Button>
+
       <List>
-        {refills.map((refill, index) => (
-          <RefillItem key={index} refill={refill} />
+        {refills.map((refill) => (
+          <RefillItem
+            key={refill.id}
+            refill={refill}
+            onEdit={() => {
+              setCurrentRefill(refill);
+              setShowDialog(true);
+            }}
+            onDelete={() => deleteRefill(refill.id)}
+          />
         ))}
       </List>
-      <Fab color="primary" aria-label="add" onClick={() => setOpen(true)}>
-        <AddIcon />
-      </Fab>
-      <RefillDialog open={open} onClose={() => setOpen(false)} />
+
+      <RefillDialog
+        open={showDialog}
+        onClose={() => setShowDialog(false)}
+        refill={currentRefill}
+        onSave={handleSave}
+      />
     </Container>
   );
-};
+}
 
 export default RefillsScreen;
