@@ -5,7 +5,7 @@ import { useProducts } from "../components/products/ProductContext";
 import { useRefills } from "../components/refills/RefillContext";
 import { AttachMoney, List, Menu, Person } from "@mui/icons-material";
 
-const DashboardScreen = ({ gasTypes }) => {
+const DashboardScreen = () => {
   const { products } = useProducts();
   const { refills } = useRefills();
 
@@ -49,7 +49,6 @@ const DashboardScreen = ({ gasTypes }) => {
         return acc + refillTotal;
       }, 0)
     : 0;
-
 
   console.log("Products:", products);
   console.log("Refills:", refills);
