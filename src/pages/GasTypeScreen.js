@@ -9,16 +9,16 @@ function GasTypesScreen() {
   const [showDialog, setShowDialog] = useState(false);
   const [currentGasType, setCurrentGasType] = useState(null);
 
-  const handleSave = (name, wholesalePrice6kg, wholesalePrice13kg) => {
+  const handleSave = (name, buyingPrice6kg, buyingPrice13kg) => {
     if (currentGasType) {
       updateGasType(
         currentGasType.id,
         name,
-        wholesalePrice6kg,
-        wholesalePrice13kg
+        buyingPrice6kg,
+        buyingPrice13kg
       );
     } else {
-      addGasType(name, wholesalePrice6kg, wholesalePrice13kg);
+      addGasType(name, buyingPrice6kg, buyingPrice13kg);
     }
     setShowDialog(false);
     setCurrentGasType(null);

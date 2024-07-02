@@ -10,23 +10,23 @@ import {
 
 const GasTypeDialog = ({ open, onClose, gasType, onSave }) => {
   const [name, setName] = useState(gasType ? gasType.name : "");
-  const [wholesalePrice6kg, setWholesalePrice6kg] = useState("");
-  const [wholesalePrice13kg, setWholesalePrice13kg] = useState("");
+  const [buyingPrice6kg, setBuyingPrice6kg] = useState("");
+  const [buyingPrice13kg, setBuyingPrice13kg] = useState("");
 
   useEffect(() => {
     if (gasType) {
       setName(gasType.name);
-      setWholesalePrice6kg(gasType.wholesalePrice6kg);
-      setWholesalePrice13kg(gasType.wholesalePrice13kg);
+      setBuyingPrice6kg(gasType.buyingPrice6kg);
+      setBuyingPrice13kg(gasType.buyingPrice13kg);
     } else {
       setName("");
-      setWholesalePrice6kg("");
-      setWholesalePrice13kg("");
+      setBuyingPrice6kg("");
+      setBuyingPrice13kg("");
     }
   }, [gasType]);
 
   const handleSave = () => {
-    onSave(name, parseInt(wholesalePrice6kg), parseInt(wholesalePrice13kg));
+    onSave(name, parseInt(buyingPrice6kg), parseInt(buyingPrice13kg));
   };
 
   return (
@@ -45,16 +45,16 @@ const GasTypeDialog = ({ open, onClose, gasType, onSave }) => {
           margin="dense"
           label="6 kg Wholesale Price"
           type="number"
-          value={wholesalePrice6kg}
-          onChange={(e) => setWholesalePrice6kg(e.target.value)}
+          value={buyingPrice6kg}
+          onChange={(e) => setBuyingPrice6kg(e.target.value)}
           fullWidth
         />
         <TextField
           margin="dense"
           label="13 kg Wholesale Price"
           type="number"
-          value={wholesalePrice13kg}
-          onChange={(e) => setWholesalePrice13kg(e.target.value)}
+          value={buyingPrice13kg}
+          onChange={(e) => setBuyingPrice13kg(e.target.value)}
           fullWidth
         />
       </DialogContent>

@@ -16,7 +16,7 @@ import { useGasTypes } from "../gasTypes/GasTypeContext";
 const ProductDialog = ({ open, onClose, product, onSave }) => {
   const [name, setName] = useState(product ? product.name : "");
   const [size, setSize] = useState(product ? product.size : "");
-  const [price, setPrice] = useState(product ? product.price : "");
+  const [sellingPrice, setSellingPrice] = useState(product ? product.sellingPrice : "");
   const [quantity, setQuantity] = useState(product ? product.quantity : "");
 
   const { gasTypes } = useGasTypes();
@@ -25,13 +25,13 @@ const ProductDialog = ({ open, onClose, product, onSave }) => {
     if (product) {
       setName(product.name);
       setSize(product.size);
-      setPrice(product.price);
+      setSellingPrice(product.sellingPrice);
       setQuantity(product.quantity);
     }
   }, [product]);
 
   const handleSave = () => {
-    onSave(name, size, parseFloat(price), parseInt(quantity));
+    onSave(name, size, parseFloat(sellingPrice), parseInt(quantity));
   };
 
   return (
@@ -65,8 +65,8 @@ const ProductDialog = ({ open, onClose, product, onSave }) => {
           margin="dense"
           label="Price"
           type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          value={sellingPrice}
+          onChange={(e) => setSellingPrice(e.target.value)}
           fullWidth
         />
         <TextField

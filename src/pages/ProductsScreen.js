@@ -9,11 +9,11 @@ function ProductsScreen() {
   const [showDialog, setShowDialog] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
 
-  const handleSave = (name, size, price, quantity) => {
+  const handleSave = (name, size, sellingPrice, quantity) => {
     if (currentProduct) {
-      updateProduct(currentProduct.id, name, size, price, quantity);
+      updateProduct(currentProduct.id, name, size, sellingPrice, quantity);
     } else {
-      addProduct(name, size, price, quantity);
+      addProduct(name, size, sellingPrice, quantity);
     }
     setShowDialog(false);
     setCurrentProduct(null);

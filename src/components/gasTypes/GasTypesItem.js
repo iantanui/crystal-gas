@@ -96,7 +96,7 @@ const GasTypeItem = ({ index, gasType, onEdit, onDelete }) => {
             }}
           >
             <span>6 kg</span>
-            <span>{gasType.wholesalePrice6kg}</span>
+            <span>{gasType.buyingPrice6kg}</span>
           </Typography>
 
           <Typography
@@ -108,7 +108,7 @@ const GasTypeItem = ({ index, gasType, onEdit, onDelete }) => {
             }}
           >
             <span>13 kg</span>
-            <span>{gasType.wholesalePrice13kg}</span>
+            <span>{gasType.buyingPrice13kg}</span>
           </Typography>
         </CardContent>
       </Card>

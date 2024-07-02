@@ -39,7 +39,7 @@ const RefillItem = ({ refill, onEdit, onDelete }) => {
   const calculateTotalPrice = () => {
     let totalPrice = 0;
     refill.selectedProducts.forEach((product) => {
-      totalPrice += product.price * product.quantity;
+      totalPrice += product.sellingPrice * product.quantity;
     });
     return totalPrice;
   };

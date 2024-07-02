@@ -105,7 +105,7 @@ const ProductItem = ({ index, product, onEdit, onDelete }) => {
           }}
         >
           <span>Price:</span>
-          <span>{product.price}</span>
+          <span>{product.sellingPrice}</span>
         </Typography>
         <Typography
           style={{

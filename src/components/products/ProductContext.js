@@ -7,22 +7,22 @@ export const useProducts = () => useContext(ProductContext);
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
-  const addProduct = (name, size, price, quantity) => {
+  const addProduct = (name, size, sellingPrice, quantity) => {
     const newProduct = {
       id: Date.now().toString(),
       name,
       size,
-      price,
+      sellingPrice,
       quantity,
     };
     setProducts((prevProducts) => [...prevProducts, newProduct]);
   };
 
-  const updateProduct = (id, name, size, price, quantity) => {
+  const updateProduct = (id, name, size, sellingPrice, quantity) => {
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
         product.id === id
-          ? { ...product, name, size, price, quantity }
+          ? { ...product, name, size, sellingPrice, quantity }
           : product
       )
     );
