@@ -1,32 +1,88 @@
-import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button } from '@mui/material';
-import { useProduct } from './ProductContext';
+import React, { useEffect, useState } from "react";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  Button,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
+import { useGasTypes } from "../gasTypes/GasTypeContext";
 
-const ProductDialog = ({ open, onClose, product, isEdit }) => {
-  const { addProduct, updateProduct } = useProduct();
-  const [name, setName] = useState(product ? product.name : '');
-  const [price, setPrice] = useState(product ? product.price : '');
+const ProductDialog = ({ open, onClose, product, onSave }) => {
+  const [name, setName] = useState(product ? product.name : "");
+  const [size, setSize] = useState(product ? product.size : "");
+  const [price, setPrice] = useState(product ? product.price : "");
+  const [quantity, setQuantity] = useState(product ? product.quantity : "");
 
-  const handleSubmit = () => {
-    const newProduct = { name, price };
-    if (isEdit) {
-      updateProduct(product.index, newProduct);
-    } else {
-      addProduct(newProduct);
+  const { gasTypes } = useGasTypes();
+
+  useEffect(() => {
+    if (product) {
+      setName(product.name);
+      setSize(product.size);
+      setPrice(product.price);
+      setQuantity(product.quantity);
     }
-    onClose();
+  }, [product]);
+
+  const handleSave = () => {
+    onSave(name, size, parseFloat(price), parseInt(quantity));
   };
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>{isEdit ? 'Edit Product' : 'Add Product'}</DialogTitle>
+      <DialogTitle>{product ? "Edit Product" : "Add Product"}</DialogTitle>
       <DialogContent>
-        <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} fullWidth />
-        <TextField label="Price" value={price} onChange={(e) => setPrice(e.target.value)} fullWidth />
+        <FormControl fullWidth margin="dense">
+          <InputLabel>Gas Type</InputLabel>
+          <Select
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          >
+            {gasTypes.map((gasType) => (
+              <MenuItem key={gasType.id} value={gasType.name}>
+                {gasType.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl fullWidth margin="dense">
+          <InputLabel>Size</InputLabel>
+          <Select
+            value={size}
+            onChange={(e) => setSize(e.target.value)}
+          >
+            <MenuItem value="6kg">6kg</MenuItem>
+            <MenuItem value="13kg">13kg</MenuItem>
+          </Select>
+        </FormControl>
+        <TextField
+          margin="dense"
+          label="Price"
+          type="number"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          fullWidth
+        />
+        <TextField
+          margin="dense"
+          label="Quantity"
+          type="number"
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
+          fullWidth
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={handleSubmit}>{isEdit ? 'Update' : 'Add'}</Button>
+        <Button onClick={handleSave} variant="contained" color="primary">
+          {product ? "Update" : "Add"}
+        </Button>
       </DialogActions>
     </Dialog>
   );

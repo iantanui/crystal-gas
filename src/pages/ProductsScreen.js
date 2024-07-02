@@ -1,27 +1,71 @@
-import React, { useState } from 'react';
-import { Container, List, Fab } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import ProductItem from '../components/products/ProductItem';
-import ProductDialog from '../components/products/ProductDialog';
-import { useProduct } from '../components/products/ProductContext';
+import React, { useState } from "react";
+import { Container, Typography, Button, List } from "@mui/material";
+import ProductItem from "../components/products/ProductItem";
+import ProductDialog from "../components/products/ProductDialog";
+import { useProducts } from "../components/products/ProductContext";
 
-const ProductsScreen = () => {
-  const { products } = useProduct();
-  const [open, setOpen] = useState(false);
+function ProductsScreen() {
+  const { products, addProduct, deleteProduct, updateProduct } = useProducts();
+  const [showDialog, setShowDialog] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState(null);
+
+  const handleSave = (name, size, price, quantity) => {
+    if (currentProduct) {
+      updateProduct(
+        currentProduct.id,
+        name,
+        size,
+        price,
+        quantity
+      );
+    } else {
+      addProduct(name, size, price, quantity);
+    }
+    setShowDialog(false);
+    setCurrentProduct(null);
+  };
 
   return (
-    <Container>
+    <Container style={{ padding: "0" }}>
+      <Typography variant="h6" style={{ textAlign: "left" }}>
+        Products
+      </Typography>
+
+      <Button
+        variant="contained"
+        fullWidth
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          marginBottom: "1rem",
+        }}
+        onClick={() => setShowDialog(true)}
+      >
+        Add Product
+      </Button>
+
       <List>
-        {products.map((product, index) => (
-          <ProductItem key={index} product={product} />
+        {products.map((product) => (
+          <ProductItem
+            key={product.id}
+            product={product}
+            onEdit={() => {
+              setCurrentProduct(product);
+              setShowDialog(true);
+            }}
+            onDelete={() => deleteProduct(product.id)}
+          />
         ))}
       </List>
-      <Fab color="primary" aria-label="add" onClick={() => setOpen(true)}>
-        <AddIcon />
-      </Fab>
-      <ProductDialog open={open} onClose={() => setOpen(false)} />
+
+      <ProductDialog
+        open={showDialog}
+        onClose={() => setShowDialog(false)}
+        product={currentProduct}
+        onSave={handleSave}
+      />
     </Container>
   );
-};
+}
 
 export default ProductsScreen;

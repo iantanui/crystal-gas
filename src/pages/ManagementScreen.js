@@ -32,10 +32,10 @@ const ManagementScreen = () => {
         <GasTypeScreen />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <RefillsScreen />
+        <ProductsScreen />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <ProductsScreen />
+        <RefillsScreen />
       </TabPanel>
     </Box>
   );
