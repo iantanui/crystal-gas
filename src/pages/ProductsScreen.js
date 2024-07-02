@@ -11,13 +11,7 @@ function ProductsScreen() {
 
   const handleSave = (name, size, price, quantity) => {
     if (currentProduct) {
-      updateProduct(
-        currentProduct.id,
-        name,
-        size,
-        price,
-        quantity
-      );
+      updateProduct(currentProduct.id, name, size, price, quantity);
     } else {
       addProduct(name, size, price, quantity);
     }
@@ -45,17 +39,22 @@ function ProductsScreen() {
       </Button>
 
       <List>
-        {products.map((product) => (
-          <ProductItem
-            key={product.id}
-            product={product}
-            onEdit={() => {
-              setCurrentProduct(product);
-              setShowDialog(true);
-            }}
-            onDelete={() => deleteProduct(product.id)}
-          />
-        ))}
+        {products
+          .slice()
+          .reverse()
+          .map((product, index) => (
+            <React.Fragment key={product.id}>
+              <ProductItem
+                index={index}
+                product={product}
+                onEdit={() => {
+                  setCurrentProduct(product);
+                  setShowDialog(true);
+                }}
+                onDelete={() => deleteProduct(product.id)}
+              />
+            </React.Fragment>
+          ))}
       </List>
 
       <ProductDialog

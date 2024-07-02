@@ -46,6 +46,7 @@ const ProductItem = ({ index, product, onEdit, onDelete }) => {
             alignItems: "center",
           }}
         >
+          {" "}
           <Typography
             style={{
               padding: "1px 5px",
@@ -58,11 +59,9 @@ const ProductItem = ({ index, product, onEdit, onDelete }) => {
           >
             {index + 1}
           </Typography>
-
           <IconButton onClick={handleMenuOpen}>
             <MoreVert />
           </IconButton>
-
           <Menu
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}

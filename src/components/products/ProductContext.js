@@ -9,27 +9,29 @@ export const ProductProvider = ({ children }) => {
 
   const addProduct = (name, size, price, quantity) => {
     const newProduct = {
-      id: Math.floor(Math.random() * 1000) + 1,
+      id: Date.now().toString(),
       name,
       size,
       price,
       quantity,
     };
-    setProducts([...products, newProduct]);
+    setProducts((prevProducts) => [...prevProducts, newProduct]);
   };
 
   const updateProduct = (id, name, size, price, quantity) => {
-    const updatedProducts = products.map((product) =>
-      product.id === id
-        ? { ...product, name, size, price, quantity }
-        : product
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.id === id
+          ? { ...product, name, size, price, quantity }
+          : product
+      )
     );
-    setProducts(updatedProducts);
   };
 
   const deleteProduct = (id) => {
-    const updatedProducts = products.filter((product) => product.id !== id);
-    setProducts(updatedProducts);
+    setProducts((prevProducts) =>
+      prevProducts.filter((product) => product.id !== id)
+    );
   };
 
   return (
