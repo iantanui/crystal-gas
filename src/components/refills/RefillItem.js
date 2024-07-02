@@ -36,6 +36,14 @@ const RefillItem = ({ refill, onEdit, onDelete }) => {
     ));
   };
 
+  const calculateTotalPrice = () => {
+    let totalPrice = 0;
+    refill.selectedProducts.forEach((product) => {
+      totalPrice += product.price * product.quantity;
+    });
+    return totalPrice;
+  };
+
   return (
     <Card
       variant="outlined"
@@ -118,11 +126,21 @@ const RefillItem = ({ refill, onEdit, onDelete }) => {
             justifyContent: "space-between",
           }}
         >
-         <span> Products: </span>
+          <span> Products: </span>
           <span>{renderProductList()}</span>
         </Typography>
 
-        
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>Total Price:</span>
+          <span> KES {calculateTotalPrice()}</span>
+        </Typography>
       </CardContent>
     </Card>
   );
