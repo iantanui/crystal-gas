@@ -3,11 +3,13 @@ import DashboardCard from "../components/dashboard/DashboardCard";
 import { Container, Grid, Typography } from "@mui/material";
 import { useProducts } from "../components/products/ProductContext";
 import { useRefills } from "../components/refills/RefillContext";
+import { useGasTypes } from "../components/gasTypes/GasTypeContext";
 import { AttachMoney, List, Menu, Person } from "@mui/icons-material";
 
 const DashboardScreen = () => {
   const { products } = useProducts();
   const { refills } = useRefills();
+  const { gasTypes } = useGasTypes();
 
   const totalProducts = products ? products.length : 0;
   const totalRefills = refills ? refills.length : 0;
@@ -37,10 +39,13 @@ const DashboardScreen = () => {
     ? refills.reduce((acc, refill) => {
         const refillTotal = refill.selectedProducts
           ? refill.selectedProducts.reduce((sum, product) => {
-              const productSellingPrice = products.find(
-                (p) => p.id === product.id
-              )?.sellingPrice;
-              const gasTypeBuyingPrice = product.buyingPrice;
+              const productData = products.find((p) => p.id === product.id);
+              const productSellingPrice = productData?.sellingPrice || 0;
+              const gasType = gasTypes.find((g) => g.name === product.name);
+              const gasTypeBuyingPrice =
+                product.size === "6kg"
+                  ? gasType?.buyingPrice6kg
+                  : gasType?.buyingPrice13kg;
               const productNetRevenue =
                 (productSellingPrice - gasTypeBuyingPrice) * product.quantity;
               return sum + productNetRevenue;
@@ -52,6 +57,9 @@ const DashboardScreen = () => {
 
   console.log("Products:", products);
   console.log("Refills:", refills);
+
+  console.log("Gross Revenue:", grossRevenue);
+  console.log("Net Revenue:", netRevenue);
 
   return (
     <Container style={{ marginTop: "20px" }}>
