@@ -20,9 +20,15 @@ import { Add, Remove } from "@mui/icons-material";
 import { useProducts } from "../products/ProductContext";
 
 const RefillDialog = ({ open, onClose, refill, onSave }) => {
-  const [customerName, setCustomerName] = useState(refill ? refill.customerName : "");
-  const [phoneNumber, setPhoneNumber] = useState(refill ? refill.phoneNumber : "");
-  const [selectedProducts, setSelectedProducts] = useState(refill ? refill.selectedProducts : []);
+  const [customerName, setCustomerName] = useState(
+    refill ? refill.customerName : ""
+  );
+  const [phoneNumber, setPhoneNumber] = useState(
+    refill ? refill.phoneNumber : ""
+  );
+  const [selectedProducts, setSelectedProducts] = useState(
+    refill ? refill.selectedProducts : []
+  );
 
   const { products } = useProducts();
 
@@ -31,26 +37,40 @@ const RefillDialog = ({ open, onClose, refill, onSave }) => {
       setCustomerName(refill.customerName);
       setPhoneNumber(refill.phoneNumber);
       setSelectedProducts(refill.selectedProducts);
+    } else {
+      setCustomerName("");
+      setPhoneNumber("");
+      setSelectedProducts("");
     }
-  }, [refill]);
+  }, [refill, open]);
 
   const handleSave = () => {
     onSave(customerName, phoneNumber, selectedProducts);
+    setCustomerName("");
+    setPhoneNumber("");
+    setSelectedProducts("");
+    onClose();
   };
 
   const handleProductToggle = (product) => {
-    const currentIndex = selectedProducts.findIndex((item) => item.id === product.id);
+    const currentIndex = selectedProducts.findIndex(
+      (item) => item.id === product.id
+    );
     if (currentIndex === -1) {
       setSelectedProducts([...selectedProducts, { ...product, quantity: 1 }]);
     } else {
-      const newSelectedProducts = selectedProducts.filter((item) => item.id !== product.id);
+      const newSelectedProducts = selectedProducts.filter(
+        (item) => item.id !== product.id
+      );
       setSelectedProducts(newSelectedProducts);
     }
   };
 
   const handleQuantityChange = (product, increment) => {
     const updatedProducts = selectedProducts.map((item) =>
-      item.id === product.id ? { ...item, quantity: item.quantity + increment } : item
+      item.id === product.id
+        ? { ...item, quantity: item.quantity + increment }
+        : item
     );
     setSelectedProducts(updatedProducts);
   };
@@ -80,16 +100,25 @@ const RefillDialog = ({ open, onClose, refill, onSave }) => {
             multiple
             value={selectedProducts.map((product) => product.id)}
             renderValue={(selected) =>
-              selected.map((id) => products.find((product) => product.id === id).name).join(", ")
+              selected
+                .map((id) => products.find((product) => product.id === id).name)
+                .join(", ")
             }
           >
             {products.map((product) => (
               <MenuItem key={product.id} value={product.id}>
                 <Checkbox
-                  checked={selectedProducts.findIndex((item) => item.id === product.id) > -1}
+                  checked={
+                    selectedProducts.findIndex(
+                      (item) => item.id === product.id
+                    ) > -1
+                  }
                   onChange={() => handleProductToggle(product)}
                 />
-                <ListItemText primary={product.name} secondary={`Size: ${product.size}`} />
+                <ListItemText
+                  primary={product.name}
+                  secondary={`Size: ${product.size}`}
+                />
               </MenuItem>
             ))}
           </Select>
@@ -97,8 +126,14 @@ const RefillDialog = ({ open, onClose, refill, onSave }) => {
         <List>
           {selectedProducts.map((product) => (
             <ListItem key={product.id}>
-              <ListItemText primary={product.name} secondary={`Size: ${product.size}`} />
-              <IconButton onClick={() => handleQuantityChange(product, -1)} disabled={product.quantity <= 1}>
+              <ListItemText
+                primary={product.name}
+                secondary={`Size: ${product.size}`}
+              />
+              <IconButton
+                onClick={() => handleQuantityChange(product, -1)}
+                disabled={product.quantity <= 1}
+              >
                 <Remove />
               </IconButton>
               {product.quantity}
