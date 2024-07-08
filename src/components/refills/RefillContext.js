@@ -9,26 +9,28 @@ export const RefillProvider = ({ children }) => {
 
   const addRefill = (customerName, phoneNumber, selectedProducts) => {
     const newRefill = {
-      id: Math.floor(Math.random() * 1000) + 1,
+      id: Date.now().toString(),
       customerName,
       phoneNumber,
       selectedProducts,
     };
-    setRefills([...refills, newRefill]);
+    setRefills((prevRefills) => [...prevRefills, newRefill]);
   };
 
   const updateRefill = (id, customerName, phoneNumber, selectedProducts) => {
-    const updatedRefills = refills.map((refill) =>
-      refill.id === id
-        ? { ...refill, customerName, phoneNumber, selectedProducts }
-        : refill
+    setRefills((prevRefills) =>
+      prevRefills.map((refill) =>
+        refill.id === id
+          ? { ...refill, customerName, phoneNumber, selectedProducts }
+          : refill
+      )
     );
-    setRefills(updatedRefills);
   };
 
   const deleteRefill = (id) => {
-    const updatedRefills = refills.filter((refill) => refill.id !== id);
-    setRefills(updatedRefills);
+    setRefills((prevRefills) =>
+      prevRefills.filter((refill) => refill.id !== id)
+    );
   };
 
   return (

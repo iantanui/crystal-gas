@@ -11,7 +11,12 @@ function RefillsScreen() {
 
   const handleSave = (customerName, phoneNumber, selectedProducts) => {
     if (currentRefill) {
-      updateRefill(currentRefill.id, customerName, phoneNumber, selectedProducts);
+      updateRefill(
+        currentRefill.id,
+        customerName,
+        phoneNumber,
+        selectedProducts
+      );
     } else {
       addRefill(customerName, phoneNumber, selectedProducts);
     }
@@ -28,24 +33,33 @@ function RefillsScreen() {
       <Button
         variant="contained"
         fullWidth
-        style={{ backgroundColor: "black", color: "white", marginBottom: "1rem" }}
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          marginBottom: "1rem",
+        }}
         onClick={() => setShowDialog(true)}
       >
         Add Refill
       </Button>
 
       <List>
-        {refills.map((refill) => (
-          <RefillItem
-            key={refill.id}
-            refill={refill}
-            onEdit={() => {
-              setCurrentRefill(refill);
-              setShowDialog(true);
-            }}
-            onDelete={() => deleteRefill(refill.id)}
-          />
-        ))}
+        {refills
+          .slice()
+          .reverse()
+          .map((refill, index) => (
+            <React.Fragment key={refill.id}>
+              <RefillItem
+                index={index}
+                refill={refill}
+                onEdit={() => {
+                  setCurrentRefill(refill);
+                  setShowDialog(true);
+                }}
+                onDelete={() => deleteRefill(refill.id)}
+              />
+            </React.Fragment>
+          ))}
       </List>
 
       <RefillDialog

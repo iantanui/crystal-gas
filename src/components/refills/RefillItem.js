@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { MoreVert } from "@mui/icons-material";
 
-const RefillItem = ({ refill, onEdit, onDelete }) => {
+const RefillItem = ({ index, refill, onEdit, onDelete }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleMenuOpen = (event) => {
@@ -29,7 +29,8 @@ const RefillItem = ({ refill, onEdit, onDelete }) => {
     return refill.selectedProducts.map((product, index) => (
       <React.Fragment key={product.id}>
         <Typography variant="body1">
-        <span style={{ fontWeight: "bold" }}>{product.name}</span> - {product.size}, {product.quantity}
+          <span style={{ fontWeight: "bold" }}>{product.name}</span> -{" "}
+          {product.size}, {product.quantity}
           {index < refill.selectedProducts.length - 1 && ","}
         </Typography>
       </React.Fragment>
@@ -69,6 +70,7 @@ const RefillItem = ({ refill, onEdit, onDelete }) => {
             alignItems: "center",
           }}
         >
+          {" "}
           <Typography
             style={{
               padding: "1px 5px",
@@ -79,7 +81,7 @@ const RefillItem = ({ refill, onEdit, onDelete }) => {
               textAlign: "center",
             }}
           >
-            {refill.id}
+            {index + 1}
           </Typography>
           <IconButton onClick={handleMenuOpen}>
             <MoreVert />
