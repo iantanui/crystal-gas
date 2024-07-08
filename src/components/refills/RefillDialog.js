@@ -40,7 +40,7 @@ const RefillDialog = ({ open, onClose, refill, onSave }) => {
     } else {
       setCustomerName("");
       setPhoneNumber("");
-      setSelectedProducts("");
+      setSelectedProducts([]);
     }
   }, [refill, open]);
 
@@ -48,7 +48,7 @@ const RefillDialog = ({ open, onClose, refill, onSave }) => {
     onSave(customerName, phoneNumber, selectedProducts);
     setCustomerName("");
     setPhoneNumber("");
-    setSelectedProducts("");
+    setSelectedProducts([]);
     onClose();
   };
 
