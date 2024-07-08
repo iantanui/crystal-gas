@@ -62,7 +62,7 @@ const DashboardScreen = () => {
   console.log("Net Revenue:", netRevenue);
 
   return (
-    <Container style={{ marginTop: "20px" }}>
+    <Container style={{ margin: "20px 0 60px 0" }}>
       <Typography variant="h6" color="black" gutterBottom>
         Summary
       </Typography>
