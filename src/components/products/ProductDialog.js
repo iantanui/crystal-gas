@@ -16,7 +16,9 @@ import { useGasTypes } from "../gasTypes/GasTypeContext";
 const ProductDialog = ({ open, onClose, product, onSave }) => {
   const [name, setName] = useState(product ? product.name : "");
   const [size, setSize] = useState(product ? product.size : "");
-  const [sellingPrice, setSellingPrice] = useState(product ? product.sellingPrice : "");
+  const [sellingPrice, setSellingPrice] = useState(
+    product ? product.sellingPrice : ""
+  );
   const [quantity, setQuantity] = useState(product ? product.quantity : "");
 
   const { gasTypes } = useGasTypes();
@@ -27,12 +29,24 @@ const ProductDialog = ({ open, onClose, product, onSave }) => {
       setSize(product.size);
       setSellingPrice(product.sellingPrice);
       setQuantity(product.quantity);
+    } else {
+      setName("");
+      setSize("");
+      setSellingPrice("");
+      setQuantity("");
     }
-  }, [product]);
+  }, [product, open]);
 
   const handleSave = () => {
     onSave(name, size, parseFloat(sellingPrice), parseInt(quantity));
+    setName("");
+    setSize("");
+    setSellingPrice("");
+    setQuantity("");
+    onClose();
   };
+
+
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -40,10 +54,7 @@ const ProductDialog = ({ open, onClose, product, onSave }) => {
       <DialogContent>
         <FormControl fullWidth margin="dense">
           <InputLabel>Gas Type</InputLabel>
-          <Select
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          >
+          <Select value={name} onChange={(e) => setName(e.target.value)}>
             {gasTypes.map((gasType) => (
               <MenuItem key={gasType.id} value={gasType.name}>
                 {gasType.name}
@@ -53,10 +64,7 @@ const ProductDialog = ({ open, onClose, product, onSave }) => {
         </FormControl>
         <FormControl fullWidth margin="dense">
           <InputLabel>Size</InputLabel>
-          <Select
-            value={size}
-            onChange={(e) => setSize(e.target.value)}
-          >
+          <Select value={size} onChange={(e) => setSize(e.target.value)}>
             <MenuItem value="6kg">6kg</MenuItem>
             <MenuItem value="13kg">13kg</MenuItem>
           </Select>
