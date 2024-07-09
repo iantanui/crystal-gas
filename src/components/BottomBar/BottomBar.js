@@ -1,6 +1,6 @@
 import React from 'react';
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
-import { Home, Inventory, AttachMoney } from '@mui/icons-material';
+import { Home, Inventory, Assessment } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import './BottomBar.css';
 
@@ -16,7 +16,7 @@ const BottomBar = () => {
     >
       <BottomNavigationAction label="Home" value="/" icon={<Home />} />
       <BottomNavigationAction label="Products" value="/products" icon={<Inventory />} />
-      <BottomNavigationAction label="Refills" value="/refills" icon={<AttachMoney />} />
+      <BottomNavigationAction label="Inventory" value="/inventory" icon={<Assessment />} />
       <BottomNavigationAction label="Manage" value="/management" icon={<Home />} />
     </BottomNavigation>
   );
