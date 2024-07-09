@@ -1,9 +1,19 @@
 import React from "react";
-import { Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import {
+  Container,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import { useProducts } from "../components/products/ProductContext";
 
 const InventoryScreen = () => {
-    const { products } = useProducts();
+  const { products } = useProducts();
 
   return (
     <Container style={{ marginTop: "20px" }}>
@@ -12,12 +22,12 @@ const InventoryScreen = () => {
       </Typography>
 
       <TableContainer component={Paper}>
-      <Table>
+        <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Gas name</TableCell>
-              <TableCell>Size</TableCell>
-              <TableCell>Quantity</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Gas name</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Size</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Quantity</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
