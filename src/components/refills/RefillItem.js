@@ -45,6 +45,15 @@ const RefillItem = ({ index, refill, onEdit, onDelete }) => {
     return totalPrice;
   };
 
+   // Function to format ISO date string to DD/MM/YYYY format
+   const formatISODate = (isoDate) => {
+    const date = new Date(isoDate);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero based
+    const year = date.getFullYear().toString();
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <Card
       variant="outlined"
@@ -153,7 +162,7 @@ const RefillItem = ({ index, refill, onEdit, onDelete }) => {
           }}
         >
           <span>Date</span>
-          <span>{refill.timestamp}</span>
+          <span>{formatISODate(refill.timestamp)}</span>
         </Typography>
       </CardContent>
     </Card>

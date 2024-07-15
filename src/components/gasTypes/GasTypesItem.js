@@ -21,6 +21,15 @@ const GasTypeItem = ({ index, gasType, onEdit, onDelete }) => {
     setAnchorEl(null);
   };
 
+  // Function to format ISO date string to DD/MM/YYYY format
+  const formatISODate = (isoDate) => {
+    const date = new Date(isoDate);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero based
+    const year = date.getFullYear().toString();
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <>
       <Card
@@ -120,7 +129,7 @@ const GasTypeItem = ({ index, gasType, onEdit, onDelete }) => {
             }}
           >
             <span>Date</span>
-            <span>{gasType.timestamp}</span>
+            <span>{formatISODate(gasType.timestamp)}</span>
           </Typography>
         </CardContent>
       </Card>
