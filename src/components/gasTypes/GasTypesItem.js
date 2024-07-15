@@ -86,7 +86,7 @@ const GasTypeItem = ({ index, gasType, onEdit, onDelete }) => {
             <span>Gas Type:</span>
             <span> {gasType.name}</span>
           </Typography>
-          
+
           <Typography
             style={{
               padding: "8px",
@@ -109,6 +109,18 @@ const GasTypeItem = ({ index, gasType, onEdit, onDelete }) => {
           >
             <span>13 kg</span>
             <span>KES {gasType.buyingPrice13kg}</span>
+          </Typography>
+
+          <Typography
+            style={{
+              padding: "8px",
+              display: "flex",
+              width: "95%",
+              justifyContent: "space-between",
+            }}
+          >
+            <span>Date</span>
+            <span>{gasType.timestamp}</span>
           </Typography>
         </CardContent>
       </Card>

@@ -143,6 +143,18 @@ const RefillItem = ({ index, refill, onEdit, onDelete }) => {
           <span>Total Price:</span>
           <span> KES {calculateTotalPrice()}</span>
         </Typography>
+
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>Date</span>
+          <span>{refill.timestamp}</span>
+        </Typography>
       </CardContent>
     </Card>
   );

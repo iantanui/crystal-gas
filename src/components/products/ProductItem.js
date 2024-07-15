@@ -118,6 +118,17 @@ const ProductItem = ({ index, product, onEdit, onDelete }) => {
           <span>Quantity:</span>
           <span>{product.quantity}</span>
         </Typography>
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>Date</span>
+          <span>{product.timestamp}</span>
+        </Typography>
       </CardContent>
     </Card>
   );
