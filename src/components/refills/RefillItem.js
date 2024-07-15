@@ -114,7 +114,7 @@ const RefillItem = ({ index, refill, onEdit, onDelete }) => {
             justifyContent: "space-between",
           }}
         >
-          <span>Customer Name:</span>
+          <span>Customer Name</span>
           <span> {refill.customerName}</span>
         </Typography>
         <Typography
@@ -125,7 +125,7 @@ const RefillItem = ({ index, refill, onEdit, onDelete }) => {
             justifyContent: "space-between",
           }}
         >
-          <span>Phone Number:</span>
+          <span>Phone Number</span>
           <span>{refill.phoneNumber}</span>
         </Typography>
 
@@ -137,7 +137,7 @@ const RefillItem = ({ index, refill, onEdit, onDelete }) => {
             justifyContent: "space-between",
           }}
         >
-          <span> Products: </span>
+          <span> Products </span>
           <span>{renderProductList()}</span>
         </Typography>
 
@@ -149,7 +149,7 @@ const RefillItem = ({ index, refill, onEdit, onDelete }) => {
             justifyContent: "space-between",
           }}
         >
-          <span>Total Price:</span>
+          <span>Total Price</span>
           <span> KES {calculateTotalPrice()}</span>
         </Typography>
 

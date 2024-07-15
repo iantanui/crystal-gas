@@ -90,7 +90,7 @@ const ProductItem = ({ index, product, onEdit, onDelete }) => {
             justifyContent: "space-between",
           }}
         >
-          <span>Name:</span>
+          <span>Name</span>
           <span> {product.name}</span>
         </Typography>
         <Typography
@@ -101,7 +101,7 @@ const ProductItem = ({ index, product, onEdit, onDelete }) => {
             justifyContent: "space-between",
           }}
         >
-          <span>Size:</span>
+          <span>Size</span>
           <span>{product.size}</span>
         </Typography>
         <Typography
@@ -112,7 +112,7 @@ const ProductItem = ({ index, product, onEdit, onDelete }) => {
             justifyContent: "space-between",
           }}
         >
-          <span>Price:</span>
+          <span>Price</span>
           <span>KES {product.sellingPrice}</span>
         </Typography>
         <Typography
@@ -123,7 +123,7 @@ const ProductItem = ({ index, product, onEdit, onDelete }) => {
             justifyContent: "space-between",
           }}
         >
-          <span>Quantity:</span>
+          <span>Quantity</span>
           <span>{product.quantity}</span>
         </Typography>
         <Typography

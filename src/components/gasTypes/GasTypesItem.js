@@ -91,7 +91,7 @@ const GasTypeItem = ({ index, gasType, onEdit, onDelete }) => {
               justifyContent: "space-between",
             }}
           >
-            <span>Gas Type:</span>
+            <span>Gas Type</span>
             <span> {gasType.name}</span>
           </Typography>
 
