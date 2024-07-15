@@ -14,6 +14,7 @@ export const ProductProvider = ({ children }) => {
       size,
       sellingPrice,
       quantity,
+      timestamp: new Date().toISOString(),
     };
     setProducts((prevProducts) => [...prevProducts, newProduct]);
   };
@@ -22,7 +23,7 @@ export const ProductProvider = ({ children }) => {
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
         product.id === id
-          ? { ...product, name, size, sellingPrice, quantity }
+          ? { ...product, name, size, sellingPrice, quantity, timestamp: new Date().toISOString() }
           : product
       )
     );

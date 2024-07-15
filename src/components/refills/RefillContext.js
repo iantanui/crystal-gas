@@ -13,6 +13,7 @@ export const RefillProvider = ({ children }) => {
       customerName,
       phoneNumber,
       selectedProducts,
+      timestamp: new Date().toISOString(),
     };
     setRefills((prevRefills) => [...prevRefills, newRefill]);
   };
@@ -21,7 +22,7 @@ export const RefillProvider = ({ children }) => {
     setRefills((prevRefills) =>
       prevRefills.map((refill) =>
         refill.id === id
-          ? { ...refill, customerName, phoneNumber, selectedProducts }
+          ? { ...refill, customerName, phoneNumber, selectedProducts, timestamp: new Date().toISOString() }
           : refill
       )
     );
