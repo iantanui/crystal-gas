@@ -11,6 +11,7 @@ import { RefillProvider } from './components/refills/RefillContext';
 import TopBar from './components/TopBar/TopBar';
 import BottomBar from './components/BottomBar/BottomBar';
 import InventoryScreen from './pages/InventoryScreen';
+import AnalyticsScreen from './pages/AnalyticsScreen';
 
 const App = () => (
   <Router>
@@ -20,11 +21,12 @@ const App = () => (
           <TopBar />
           <Routes>
             <Route path="/" element={<DashboardScreen />} />
-            <Route path="/products" element={<ProductsScreen />} />
+            <Route path="/products" element={<ProductsScreen/>} />
             <Route path="/refills" element={<RefillsScreen />} />
             <Route path="/management" element={<ManagementScreen />} />
             <Route path="/gastype" element={<GasTypeScreen />} />
             <Route path='/inventory' element={<InventoryScreen />} />
+            <Route path='/analytics' element={<AnalyticsScreen />} />
           </Routes>
           <BottomBar />
         </RefillProvider>

@@ -15,7 +15,7 @@ const BottomBar = () => {
        className='bottom-bar'
     >
       <BottomNavigationAction label="Dashboard" value="/" icon={<DashboardCustomizeOutlined />} showLabel/>
-      <BottomNavigationAction label="Products" value="/products" icon={<Inventory2Outlined />} showLabel />
+      <BottomNavigationAction label="Analytics" value="/analytics" icon={<Inventory2Outlined />} showLabel />
       <BottomNavigationAction label="Inventory" value="/inventory" icon={<AssessmentOutlined />} showLabel />
       <BottomNavigationAction label="Manage" value="/management" icon={<TuneOutlined />} showLabel />
     </BottomNavigation>
