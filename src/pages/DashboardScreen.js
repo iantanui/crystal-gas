@@ -55,12 +55,6 @@ const DashboardScreen = () => {
       }, 0)
     : 0;
 
-  console.log("Products:", products);
-  console.log("Refills:", refills);
-
-  console.log("Gross Revenue:", grossRevenue);
-  console.log("Net Revenue:", netRevenue);
-
   return (
     <Container style={{ margin: "20px 0 60px 0" }}>
       <Typography variant="h6" color="black" gutterBottom>
