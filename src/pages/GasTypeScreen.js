@@ -3,6 +3,7 @@ import { Container, Typography, Button, List } from "@mui/material";
 import GasTypeItem from "../components/gasTypes/GasTypesItem";
 import GasTypeDialog from "../components/gasTypes/GasTypesDialog";
 import { useGasTypes } from "../components/gasTypes/GasTypeContext";
+import Alerts from "../components/alerts/Alerts";
 
 function GasTypesScreen() {
   const { gasTypes, addGasType, deleteGasType, updateGasType } = useGasTypes();
@@ -68,6 +69,8 @@ function GasTypesScreen() {
         gasType={currentGasType}
         onSave={handleSave}
       />
+
+      <Alerts />
     </Container>
   );
 }

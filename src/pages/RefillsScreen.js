@@ -3,6 +3,7 @@ import { Container, Typography, Button, List } from "@mui/material";
 import RefillItem from "../components/refills/RefillItem";
 import RefillDialog from "../components/refills/RefillDialog";
 import { useRefills } from "../components/refills/RefillContext";
+import Alerts from "../components/alerts/Alerts";
 
 function RefillsScreen() {
   const { refills, addRefill, deleteRefill, updateRefill } = useRefills();
@@ -68,6 +69,8 @@ function RefillsScreen() {
         refill={currentRefill}
         onSave={handleSave}
       />
+      
+      <Alerts />
     </Container>
   );
 }
