@@ -3,6 +3,7 @@ import { Container, Typography, Button, List } from "@mui/material";
 import ProductItem from "../components/products/ProductItem";
 import ProductDialog from "../components/products/ProductDialog";
 import { useProducts } from "../components/products/ProductContext";
+import Alerts from "../components/alerts/Alerts";
 
 function ProductsScreen() {
   const { products, addProduct, deleteProduct, updateProduct } = useProducts();
@@ -20,7 +21,7 @@ function ProductsScreen() {
   };
 
   return (
-    <Container style={{ padding: "0" }}>
+    <Container style={{ padding: "0" , marginBottom: '60pxƒ'}}>
       <Typography variant="h6" style={{ textAlign: "left" }}>
         Products
       </Typography>
@@ -63,6 +64,8 @@ function ProductsScreen() {
         product={currentProduct}
         onSave={handleSave}
       />
+
+      <Alerts />
     </Container>
   );
 }

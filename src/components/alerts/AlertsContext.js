@@ -7,7 +7,7 @@ export const useAlerts = () => useContext(AlertsContext);
 export const AlertsProvider = ({ children }) => {
   const [alerts, setAlerts] = useState([]);
 
-  const addAlert = (message, type = "info") => {
+  const addAlert = (message, type) => {
     const newAlert = {
       id: Date.now().toString(),
       message,

@@ -6,7 +6,7 @@ const Alerts = () => {
   const { alerts, removeAlert } = useAlerts();
 
   return (
-    <div style={{ position: "fixed", bottom: 10, right: 10, zIndex: 1000 }}>
+    <div style={{ position: "fixed", bottom: 60, right: 10, zIndex: 1000 }}>
       {alerts.map((alert) => (
         <Alert
           key={alert.id}

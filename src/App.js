@@ -13,6 +13,7 @@ import BottomBar from "./components/BottomBar/BottomBar";
 import InventoryScreen from "./pages/InventoryScreen";
 import AnalyticsScreen from "./pages/AnalyticsScreen";
 import { AlertsProvider } from "./components/alerts/AlertsContext";
+import Alerts from "./components/alerts/Alerts";
 
 const App = () => (
   <Router>
@@ -29,6 +30,7 @@ const App = () => (
               <Route path="/gastype" element={<GasTypeScreen />} />
               <Route path="/inventory" element={<InventoryScreen />} />
               <Route path="/analytics" element={<AnalyticsScreen />} />
+              <Route path="/alerts" element={<Alerts />} />
             </Routes>
             <BottomBar />
           </RefillProvider>

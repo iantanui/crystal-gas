@@ -19,7 +19,7 @@ export const ProductProvider = ({ children }) => {
       timestamp: new Date().toISOString(),
     };
     setProducts((prevProducts) => [...prevProducts, newProduct]);
-    addAlert(`Product ${name} added successfully!`, "success");
+    addAlert(`${name} added successfully!`, "success");
   };
 
   const updateProduct = (id, name, size, sellingPrice, quantity) => {
@@ -37,12 +37,15 @@ export const ProductProvider = ({ children }) => {
           : product
       )
     );
+    addAlert(`${name} updated successfully!`, "success");
   };
 
   const deleteProduct = (id) => {
+    const productToDelete = products.find((product) => product.id === id);
     setProducts((prevProducts) =>
       prevProducts.filter((product) => product.id !== id)
     );
+    addAlert(`${productToDelete.name} deleted successfully!`, "success");
   };
 
   return (
