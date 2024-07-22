@@ -12,7 +12,7 @@ import TopBar from "./components/TopBar/TopBar";
 import BottomBar from "./components/BottomBar/BottomBar";
 import InventoryScreen from "./pages/InventoryScreen";
 import AnalyticsScreen from "./pages/AnalyticsScreen";
-import { AlertsProvider } from "./components/alerts/Alerts";
+import { AlertsProvider } from "./components/alerts/AlertsContext";
 
 const App = () => (
   <Router>
