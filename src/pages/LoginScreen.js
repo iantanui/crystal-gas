@@ -1,95 +1,97 @@
 import React, { useState } from "react";
 import {
-  Avatar,
-  Box,
-  Button,
   Container,
-  CssBaseline,
-  Grid,
-  TextField,
   Typography,
+  TextField,
+  Button,
+  Box,
+  Avatar,
 } from "@mui/material";
-import { Copyright, LockOutlined } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+import { LockOutlined } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const LoginScreen = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    console.log("Login clicked", { username, password });
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log("Login successful");
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Login error", error);
+      setError("Invalid email or password");
+    }
   };
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <Box
-        sx={{
-          marginTop: 8,
+        component="form"
+        noValidate
+        style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <Avatar sx={{ m: 1, bgcolor: "black" }}>
           <LockOutlined />
         </Avatar>
 
-        <Typography component="h1" variant="h5">
-          Sign in
+        <Typography variant="h3" component="h1" gutterBottom>
+          Crystal Gas
         </Typography>
 
-        <Box component="form" noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{ mt: 3, mb: 2 }}
-            onClick={handleLogin}
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoFocus
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {error && (
+          <Typography
+            color="error"
+            variant="body2"
+            style={{ marginTop: "10px" }}
           >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </Box>
+            {error}
+          </Typography>
+        )}
+        <Button
+          type="button"
+          fullWidth
+          variant="contained"
+          color="primary"
+          style={{ marginTop: "16px" }}
+          onClick={handleLogin}
+        >
+          Login
+        </Button>
       </Box>
-      <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
   );
 };
