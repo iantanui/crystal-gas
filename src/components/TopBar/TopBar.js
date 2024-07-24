@@ -34,7 +34,7 @@ const TopBar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ boxShadow: 'none'}}>
       <Toolbar
         style={{ backgroundColor: "white", color: "black", padding: "10px" }}
       >
