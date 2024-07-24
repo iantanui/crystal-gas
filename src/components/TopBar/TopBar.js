@@ -38,9 +38,9 @@ const TopBar = () => {
       <Toolbar
         style={{ backgroundColor: "white", color: "black", padding: "10px" }}
       >
-        <Box>
+        <Box sx={{ flexGrow: 1 }}>
           <Typography variant="h4">Crystal Gas</Typography>
-          <Typography variant="p" color={"gray"}>
+          <Typography variant="body2" color="gray">
             Gas management made easy
           </Typography>
         </Box>
@@ -53,8 +53,12 @@ const TopBar = () => {
               aria-haspopup="true"
               onClick={handleMenuOpen}
               color="inherit"
+              sx={{
+                fontSize: 40,
+                marginRight: 1,
+              }}
             >
-              <AccountCircleOutlined />
+              <AccountCircleOutlined sx={{ fontSize: "inherit" }} />
             </IconButton>
             <Menu
               id="menu-appbar"
