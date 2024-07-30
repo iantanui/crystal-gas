@@ -30,7 +30,7 @@ const LoginScreen = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" style={{ marginTop: "100px" }}>
       <Box
         component="form"
         noValidate
@@ -46,6 +46,9 @@ const LoginScreen = () => {
 
         <Typography variant="h3" component="h1" gutterBottom>
           Crystal Gas
+        </Typography>
+        <Typography variant="h6" gutterBottom>
+          Gas Management made easy
         </Typography>
 
         <TextField
@@ -86,7 +89,7 @@ const LoginScreen = () => {
           fullWidth
           variant="contained"
           color="primary"
-          style={{ marginTop: "16px" }}
+          style={{ marginTop: "16px", borderRadius: "20px" }}
           onClick={handleLogin}
         >
           Login
